@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1,maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <script src="https://s3-ap-northeast-1.amazonaws.com/cubism3.live2d.com/sdk/js_eap/live2dcubismcore.min.js"></script>
+  <script src="https://rawgit.com/Live2D/CubismJsComponents/master/example/wwwroot/js/live2dcubismframework.js"></script>
+  <script src="https://rawgit.com/phinajs/phina.js/develop/build/phina.js"></script>
+  <script src="https://rawgit.com/daishihmr/phigl.js/develop/build/phigl.js"></script>
+  <script src="https://rawgit.com/daishihmr/phina.live2d.js/develop/phina.live2d.js"></script>
+  <script>
+  phina.globalize();
+
+  phina.main(() => {
+    var app = GameApp({
+      backgroundColor: "#99bb10",
+      width: 480,
+      height: 640,
+      assets: {
+        "live2d.moc": {
+          "MarkModel": "assets/Mark/Mark.moc3",
+        },
+        "image": {
+          "MarkTexture": "assets/Mark/Mark.png"
+        },
+        "live2d.motion": {
+          "MarkMotion": "assets/Mark/Mark.motion3.json",
+        },
+      },
+      startLabel: "main",
+    });
+    // app.enableStats();
+    app.run();
+  });
+
+  phina.define("MainScene", {
+    superClass: "DisplayScene",
+
+    init: function() {
+      this.superInit({
+        width: 480,
+        height: 640,
+      });
+
+      let live2dLayer = Live2DLayer({
+        width: 480,
+        height: 640,
+        originX: 0,
+        originY: 0,
+      }).addChildTo(this);
+
+      let mark = Live2DSprite({
+          moc: "MarkModel",
+          textures: ["MarkTexture"],
+        })
+        .setPosition(240, 320)
+        .addChildTo(live2dLayer);
+
+      mark.play("MarkMotion");
+    },
+  });
+  </script>
+</body>
+
+</html>

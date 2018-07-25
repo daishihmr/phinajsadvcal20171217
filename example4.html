@@ -11,6 +11,7 @@
 <body>
   <script src="https://s3-ap-northeast-1.amazonaws.com/cubism3.live2d.com/sdk/js_eap/live2dcubismcore.min.js"></script>
   <script src="https://rawgit.com/Live2D/CubismJsComponents/master/example/wwwroot/js/live2dcubismframework.js"></script>
+  <script src="https://rawgit.com/toji/gl-matrix/v2.4.0/dist/gl-matrix.js"></script>
   <script src="https://rawgit.com/phinajs/phina.js/develop/build/phina.js"></script>
   <script src="https://rawgit.com/daishihmr/phigl.js/develop/build/phigl.js"></script>
   <script src="https://rawgit.com/daishihmr/phina.live2d.js/develop/phina.live2d.js"></script>
@@ -25,14 +26,17 @@
       height: 1280,
       assets: {
         "live2d.moc": {
-          "hiyori": "assets/hiyori/model.moc3",
+          "hiyori": "assets/hiyori/hiyori_pro_t07.moc3",
         },
         "image": {
-          "hiyori0": "assets/hiyori/textures/texture_00.png",
-          "hiyori1": "assets/hiyori/textures/texture_01.png",
+          "hiyori0": "assets/hiyori/hiyori_pro_t07.2048/texture_00.png",
+          "hiyori1": "assets/hiyori/hiyori_pro_t07.2048/texture_01.png",
         },
         "live2d.motion": {
-          "hiyori01": "assets/hiyori/motions/hiyori_m01.motion3.json",
+          "hiyori01": "assets/hiyori/hiyori_m01.motion3.json",
+        },
+        "live2d.physics": {
+          "hiyori": "assets/hiyori/hiyori_pro_t07.physics3.json",
         },
       },
       startLabel: "main",
@@ -60,9 +64,10 @@
       let sprite = Live2DSprite({
           moc: "hiyori",
           textures: ["hiyori0", "hiyori1"],
+          physics: "hiyori",
         })
         .setPosition(480, 640)
-        .setScale(0.002)
+        .setScale(0.5)
         .addChildTo(live2dLayer);
 
       sprite.play("hiyori01");
